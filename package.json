@@ -1,0 +1,19 @@
+{
+  "name": "node-aprs-is",
+  "version": "0.0.1",
+  "description": "APRS-IS client for Node.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ethanharstad/node-aprs-is.git"
+  },
+  "author": "Ethan Harstad <ethanharstad@gmail.com> (http://ethanharstad.github.io/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ethanharstad/node-aprs-is/issues"
+  },
+  "homepage": "https://github.com/ethanharstad/node-aprs-is"
+}
