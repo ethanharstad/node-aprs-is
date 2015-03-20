@@ -4,7 +4,7 @@ var Packet = require('../packet');
 
 var assert = require('chai').assert;
 
-describe.only('PacketFactory', function() {
+describe('PacketFactory', function() {
 
   describe('decode', function() {
 

@@ -6,7 +6,7 @@ var assert = require('chai').assert;
 describe('Filter', function() {
 
   describe('rangeFilter', function() {
-    it('returns well formatted string', function() {
+    it('returns a well formatted string', function() {
       var f = Filter.rangeFilter([-93,42], 100);
       assert.notEqual(f.search('^r/-?[0-9]{1,2}\.?[0-9]{0,}/-?[0-9]{1,3}\.?[0-9]{0,}/[0-9]{1,}$'), -1);
     });
@@ -21,22 +21,66 @@ describe('Filter', function() {
     });
   });
 
-  describe('prefixFilter', function() {});
+  describe('prefixFilter', function() {
+    it('returns a well formatted string');
 
-  describe('friendFilter', function() {});
+    it('generates correctly for a single input');
 
-  describe('objectFilter', function() {});
+    it('generates correctly for multiple inputs');
+  });
 
-  describe('typeFilter', function() {});
+  describe('friendFilter', function() {
+    it('returns a well formatted string');
 
-  describe('symbolFilter', function() {});
+    it('generates correctly for a single input');
 
-  describe('digipeaterFilter', function() {});
+    it('generates correctly for multiple inputs');
+  });
 
-  describe('areaFilter', function() {});
+  describe('objectFilter', function() {
+    it('returns a well formatted string');
 
-  describe('myRangeFilter', function() {});
+    it('generates correctly for a single input');
 
-  describe('friendRangeFilter', function() {});
+    it('generates correctly for multiple inputs');
+  });
+
+  describe('typeFilter', function() {
+    it('returns a well formatted string');
+
+    it('generates correctly');
+  });
+
+  describe('symbolFilter', function() {
+    it('returns a well formatted string');
+
+    it('generates correctly');
+  });
+
+  describe('digipeaterFilter', function() {
+    it('returns a well formatted string');
+
+    it('generates correctly for a single input');
+
+    it('generates correctly for multiple inputs');
+  });
+
+  describe('areaFilter', function() {
+    it('returns a well formatted string');
+
+    it('generates correctly');
+  });
+
+  describe('myRangeFilter', function() {
+    it('returns a well formatted string');
+
+    it('generates correctly');
+  });
+
+  describe('friendRangeFilter', function() {
+    it('returns a well formatted string');
+
+    it('generates correctly');
+  });
 
 });
