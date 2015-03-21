@@ -1,4 +1,5 @@
 var net = require('net');
+var PacketFactory = require('./packetFactory');
 
 module.exports = {
 
@@ -54,7 +55,10 @@ module.exports = {
         this.login(this.username, this.passcode);
       }
     } else {
-      console.log('!>', data);
+      var packet = PacketFactory.decode(data);
+      console.log('From: ', packet.sourceAddress);
+      console.log('Dest: ', packet.destinationAddress);
+      console.log('Data: ', packet.payload);
     }
   },
 
