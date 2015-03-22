@@ -1,5 +1,5 @@
 var net = require('net');
-var PacketFactory = require('./packetFactory');
+var Packet = require('./packet');
 
 var APRS = function() {
   this.state = 'disconnected';
@@ -56,7 +56,7 @@ APRS.prototype.parse = function(data) {
       this.login(this.username, this.passcode);
     }
   } else {
-    var packet = PacketFactory.decode(data);
+    var packet = new Packet(data);
     console.log('From: ', packet.sourceAddress);
     console.log('Dest: ', packet.destinationAddress);
     console.log('Data: ', packet.payload);
