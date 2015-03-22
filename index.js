@@ -64,7 +64,13 @@ APRS.prototype.parse = function(data) {
 };
 
 APRS.prototype.filter = function(filter) {
-  var packet = '# filter ' + filter;
+  var filterstring;
+  if(Array.isArray(filter)) {
+    filterstring = filter.join(' ');
+  } else {
+    filterstring = filter;
+  }
+  var packet = '# filter ' + filterstring;
   this.socket.write(packet + '\r\n');
 };
 
