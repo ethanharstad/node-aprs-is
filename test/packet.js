@@ -52,4 +52,77 @@ describe.only('Packet', function() {
 
   });
 
+  describe('time', function() {
+
+    describe('decode', function() {
+
+      it('decodes DHM zulu format', function() {
+        var time = new Date();
+        time.setUTCDate(9);
+        time.setUTCHours(23);
+        time.setUTCMinutes(45);
+        time.setUTCSeconds(0);
+        time.setUTCMilliseconds(0);
+        assert.equal(Packet.decodeTime('092345z').getTime(), time.getTime());
+      });
+
+      it('decodes DHM local format', function() {
+        var time = new Date();
+        time.setDate(9);
+        time.setHours(23);
+        time.setMinutes(45);
+        time.setSeconds(0);
+        time.setMilliseconds(0);
+        assert.equal(Packet.decodeTime('092345/').getTime(), time.getTime());
+      });
+
+      it('decodes HMS format', function() {
+        var time = new Date();
+        time.setUTCHours(23);
+        time.setUTCMinutes(45);
+        time.setUTCSeconds(17);
+        time.setUTCMilliseconds(0);
+        assert.equal(Packet.decodeTime('234517h').getTime(), time.getTime());
+      });
+
+      it('decodes MDHM format', function() {
+        var time = new Date();
+        time.setUTCMonth(10);
+        time.setUTCDate(9);
+        time.setUTCHours(23);
+        time.setUTCMinutes(45);
+        time.setUTCSeconds(0);
+        time.setUTCMilliseconds(0);
+        assert.equal(Packet.decodeTime('10092345').getTime(), time.getTime());
+      });
+
+      it('returns a default date', function() {
+        var time = new Date();
+        assert.closeTo(Packet.decodeTime().getTime(), time.getTime(), 500);
+      })
+
+    });
+
+    describe('encode', function() {
+
+      it('encodes DHM zulu format', function() {
+
+      });
+
+      it('encodes DHM local format', function() {
+
+      });
+
+      it('encodes HMS format', function() {
+
+      });
+
+      it('encodes MDHM format', function() {
+
+      });
+
+    });
+
+  })
+
 });
