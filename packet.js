@@ -29,8 +29,29 @@ var Packet = function(content, options) {
   }
 }
 
-Packet.base91decode = function() {};
+Packet.base91decode = function(value) {
+  var ret = 0;
+  var len = value.length;
+  for(var n = 0; n < len; n++) {
+    var x = value.charCodeAt(len - n - 1) - 33;
+    ret += x * Math.pow(91, n);
+  }
+  return ret;
+};
 
-Packet.base91encode = function() {};
+Packet.base91encode = function(value) {
+  var ret = '';
+  var n = 1;
+  while(Math.pow(91, n) <= value) {
+    n++;
+  }
+  for(; n >= 1; n--) {
+    var div = Math.pow(91, n - 1);
+    var x = Math.floor(value / div);
+    value = value % div;
+    ret += String.fromCharCode(x + 33);
+  }
+  return ret;
+};
 
 module.exports = Packet;
