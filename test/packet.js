@@ -3,7 +3,7 @@ var Packet = require('../packet');
 
 var assert = require('chai').assert;
 
-describe('Packet', function() {
+describe.only('Packet', function() {
 
   describe('constructor', function() {
 
@@ -36,6 +36,18 @@ describe('Packet', function() {
         assert.instanceOf(p, Packet);
       });
 
+    });
+
+  });
+
+  describe('base91', function() {
+
+    it('decodes base91', function() {
+      assert.equal(Packet.base91decode('1Cmi'), 12345678);
+    });
+
+    it('encodes base91', function() {
+      assert.equal(Packet.base91encode(12345678), '1Cmi');
     });
 
   });
