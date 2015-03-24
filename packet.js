@@ -17,9 +17,13 @@ var Packet = function(content, options) {
         break;
       case '/': // Position, w/ timestamp, w/o messaging
       case '@': // Position, w/ timestamp, w/ messaging
+        this.packetType = 'position';
+        this.time = Packet.decodeTime(this.payload.slice(1,8));
+        break;
       case '!': // Position, w/o timestamp, w/o messaging
       case '=': // Position, w/o timestamp, w/ messaging
         this.packetType = 'position';
+        this.time = Packet.decodeTime();
         break;
     }
 

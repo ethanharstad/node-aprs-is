@@ -60,6 +60,9 @@ APRS.prototype.parse = function(data) {
     console.log('From: ', packet.sourceAddress);
     console.log('Dest: ', packet.destinationAddress);
     console.log('Data: ', packet.payload);
+    if(packet.time) {
+      console.log('Time: ', packet.time);
+    }
   }
 };
 
