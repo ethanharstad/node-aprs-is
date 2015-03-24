@@ -190,4 +190,21 @@ describe.only('Packet', function() {
 
   });
 
+  describe('uncompressed position', function() {
+
+    it('decodes a position string', function() {
+      var p = Packet.decodePosition('4903.50N/07201.75W-');
+      assert.equal(p.symbolTable, '/', 'symbolTable');
+      assert.equal(p.symbolCode, '-', 'symbolCode');
+      assert.closeTo(p.latitude, 49.05833, 0.0001, 'latitude');
+      assert.closeTo(p.longitude, -72.029167, 0.0001, 'longitude');
+    });
+
+    it('encodes a position string', function() {
+      var p = Packet.encodePosition(49.05834, -72.029167, '/', '-');
+      assert.equal(p, '4903.50N/07201.75W-');
+    })
+
+  });
+
 });

@@ -56,9 +56,9 @@ Packet.encodeCoordinate = function(value, type) {
   var decMin = ~~((min - intMin) * 100);
   var pad = '000';
   if(type === 'longitude') {
-    coordinate += String(pad + deg).slice(-3);
+    coordinate += String(pad + Math.abs(deg)).slice(-3);
   } else {
-    coordinate += String(pad + deg).slice(-2);
+    coordinate += String(pad + Math.abs(deg)).slice(-2);
   }
   coordinate += String(pad + intMin).slice(-2) + '.';
   coordinate += String(pad + decMin).slice(-2);
@@ -77,6 +77,22 @@ Packet.encodeCoordinate = function(value, type) {
   }
   return coordinate;
 };
+
+Packet.decodePosition = function(value) {
+  return {
+    symbolTable: value.charAt(8),
+    symbolCode: value.charAt(18),
+    latitude: Packet.decodeCoordinate(value.slice(0, 8)),
+    longitude: Packet.decodeCoordinate(value.slice(9, 18))
+  };
+}
+
+Packet.encodePosition = function(latitude, longitude, table, code) {
+  return Packet.encodeCoordinate(latitude, 'latitude') +
+    (table || '/') +
+    Packet.encodeCoordinate(longitude, 'longitude') +
+    (code || '-');
+}
 
 Packet.decodeTime = function(value) {
   var time = new Date();
