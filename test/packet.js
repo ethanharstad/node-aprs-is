@@ -134,4 +134,60 @@ describe.only('Packet', function() {
 
   });
 
+  describe('coordinates', function() {
+
+    describe('decode', function() {
+
+      it('decodes a positive latitude', function() {
+        assert.closeTo(Packet.decodeCoordinate('1212.34N'), 12.20567, .00001);
+      });
+
+      it('decodes a negative latitude', function() {
+        assert.closeTo(Packet.decodeCoordinate('1212.34S'), -12.20567, .00001);
+      });
+
+      it('decodes a positive longitude', function() {
+        assert.closeTo(Packet.decodeCoordinate('12312.34E'), 123.20567, .00001);
+      });
+
+      it('decodes a negative longitude', function() {
+        assert.closeTo(Packet.decodeCoordinate('12312.34W'), -123.20567, .00001);
+      });
+
+    });
+
+    describe('encode', function() {
+
+      it('encodes a positive latitude', function() {
+        assert.equal(Packet.encodeCoordinate(12.20567, 'latitude'), '1212.34N');
+      });
+
+      it('encodes a negative latitude', function() {
+        assert.equal(Packet.encodeCoordinate(-12.20567, 'latitude'), '1212.34S');
+      });
+
+      it('encodes a positive longitude', function() {
+        assert.equal(Packet.encodeCoordinate(123.20567, 'longitude'), '12312.34E');
+      });
+
+      it('encodes a negative longitude', function() {
+        assert.equal(Packet.encodeCoordinate(-123.20567, 'longitude'), '12312.34W');
+      });
+
+      it('encodes latitudes with zero padding', function() {
+        assert.equal(Packet.encodeCoordinate(0.0, 'latitude'), '0000.00N');
+      });
+
+      it('encodes longitudes with zero padding', function() {
+        assert.equal(Packet.encodeCoordinate(0.0, 'longitude'), '00000.00E');
+      });
+
+      it('encodes latitude by default', function() {
+        assert.equal(Packet.encodeCoordinate(12.20567).slice(-1), 'N');
+      })
+
+    });
+
+  });
+
 });

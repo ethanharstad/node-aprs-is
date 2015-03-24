@@ -33,6 +33,51 @@ var Packet = function(content, options) {
   }
 }
 
+Packet.decodeCoordinate = function(value) {
+  var position = value.slice(0, -1);
+  var hemisphere = value.slice(-1);
+  var tokens = position.split('.');
+  var deg = Number(tokens[0].slice(0, -2));
+  var min = Number(tokens[0].slice(-2));
+  min += Number(tokens[1]) / 100;
+  var coordinate = deg + min / 60;
+  if(hemisphere === 'S' || hemisphere === 'W') {
+    coordinate *= -1;
+  }
+  return coordinate;
+};
+
+Packet.encodeCoordinate = function(value, type) {
+  type = type || 'latitude';
+  var coordinate = '';
+  var deg = ~~value;
+  var min = (Math.abs(value - deg) * 60);
+  var intMin = ~~ min;
+  var decMin = ~~((min - intMin) * 100);
+  var pad = '000';
+  if(type === 'longitude') {
+    coordinate += String(pad + deg).slice(-3);
+  } else {
+    coordinate += String(pad + deg).slice(-2);
+  }
+  coordinate += String(pad + intMin).slice(-2) + '.';
+  coordinate += String(pad + decMin).slice(-2);
+  if(value >= 0) {
+    if(type === 'longitude') {
+      coordinate += 'E';
+    } else {
+      coordinate += 'N';
+    }
+  } else {
+    if(type === 'longitude') {
+      coordinate += 'W';
+    } else {
+      coordinate += 'S';
+    }
+  }
+  return coordinate;
+};
+
 Packet.decodeTime = function(value) {
   var time = new Date();
   if(typeof value === 'string') {
