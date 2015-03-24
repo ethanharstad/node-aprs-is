@@ -67,7 +67,97 @@ Packet.decodeTime = function(value) {
 
 Packet.encodeTime = function(value, format) {
   var time = '';
-
+  switch(format) {
+    case 'HMS':
+      // Hour
+      var token = value.getUTCHours().toString();
+      if(token.length < 2) {
+        token = '0' + token;
+      }
+      time += token;
+      // Minute
+      token = value.getUTCMinutes().toString();
+      if(token.length < 2) {
+        token = '0' + token;
+      }
+      time += token;
+      // Second
+      token = value.getUTCSeconds().toString();
+      if(token.length < 2) {
+        token = '0' + token;
+      }
+      time += token;
+      time += 'h';
+      break;
+    case 'MDHM':
+      // Month
+      var token = value.getUTCMonth().toString();
+      if(token.length < 2) {
+        token = '0' + token;
+      }
+      time += token;
+      // Date
+      var token = value.getUTCDate().toString();
+      if(token.length < 2) {
+        token = '0' + token;
+      }
+      time += token;
+      // Hour
+      token = value.getUTCHours().toString();
+      if(token.length < 2) {
+        token = '0' + token;
+      }
+      time += token;
+      // Minute
+      token = value.getUTCMinutes().toString();
+      if(token.length < 2) {
+        token = '0' + token;
+      }
+      time += token;
+      break;
+    case 'DHML':
+      // Date
+      var token = value.getDate().toString();
+      if(token.length < 2) {
+        token = '0' + token;
+      }
+      time += token;
+      // Hour
+      token = value.getHours().toString();
+      if(token.length < 2) {
+        token = '0' + token;
+      }
+      time += token;
+      // Minute
+      token = value.getMinutes().toString();
+      if(token.length < 2) {
+        token = '0' + token;
+      }
+      time += token;
+      time += '/';
+      break;
+    case 'DHMZ':
+    default:
+      // Date
+      var token = value.getUTCDate().toString();
+      if(token.length < 2) {
+        token = '0' + token;
+      }
+      time += token;
+      // Hour
+      token = value.getUTCHours().toString();
+      if(token.length < 2) {
+        token = '0' + token;
+      }
+      time += token;
+      // Minute
+      token = value.getUTCMinutes().toString();
+      if(token.length < 2) {
+        token = '0' + token;
+      }
+      time += token;
+      time += 'z';
+  }
   return time;
 };
 

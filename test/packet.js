@@ -106,23 +106,32 @@ describe.only('Packet', function() {
     describe('encode', function() {
 
       it('encodes DHM zulu format', function() {
-
+        var time = new Date(Date.UTC(2014, 1, 2, 23, 45, 33));
+        assert.equal(Packet.encodeTime(time, 'DHMZ'), '022345z');
       });
 
       it('encodes DHM local format', function() {
-
+        var time = new Date(2014, 1, 2, 23, 45, 33);
+        assert.equal(Packet.encodeTime(time, 'DHML'), '022345/');
       });
 
       it('encodes HMS format', function() {
-
+        var time = new Date(Date.UTC(2014, 1, 2, 23, 45, 33));
+        assert.equal(Packet.encodeTime(time, 'HMS'), '234533h');
       });
 
       it('encodes MDHM format', function() {
+        var time = new Date(Date.UTC(2014, 1, 2, 23, 45, 33));
+        assert.equal(Packet.encodeTime(time, 'MDHM'), '01022345');
+      });
 
+      it('returns DHM zulu default', function() {
+        var time = new Date(Date.UTC(2014, 1, 2, 23, 45, 33));
+        assert.equal(Packet.encodeTime(time), '022345z');
       });
 
     });
 
-  })
+  });
 
 });
