@@ -207,4 +207,24 @@ describe.only('Packet', function() {
 
   });
 
+  describe('compressed position', function() {
+
+    it('compresses latitude', function() {
+      assert.equal(Packet.compressLatitude(12.12), 'HBL^');
+    });
+
+    it('compresses longitude', function() {
+      assert.equal(Packet.compressLongitude(-72.75), '<*e7');
+    });
+
+    it('decompresses latitude', function() {
+      assert.closeTo(Packet.decompressLatitude('HBL^'), 12.12, 0.00001);
+    });
+
+    it('decompresses longitude', function() {
+      assert.closeTo(Packet.decompressLongitude('<*e7'), -72.75, 0.00001)
+    });
+
+  })
+
 });

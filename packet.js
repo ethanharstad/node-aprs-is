@@ -85,6 +85,22 @@ Packet.encodeCoordinate = function(value, type) {
   return coordinate;
 };
 
+Packet.compressLatitude = function(value) {
+  return Packet.base91encode(380926 * (90 - value));
+};
+
+Packet.decompressLatitude = function(value) {
+  return 90 - (Packet.base91decode(value) / 380926);
+}
+
+Packet.compressLongitude = function(value) {
+  return Packet.base91encode(190463 * (180 + value));
+}
+
+Packet.decompressLongitude = function(value) {
+  return -180 + (Packet.base91decode(value) / 190463);
+}
+
 Packet.decodePosition = function(value) {
   return {
     symbolTable: value.charAt(8),
