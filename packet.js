@@ -7,6 +7,7 @@ var Packet = function(content, options) {
     this.destinationAddress = content.slice(destinationIndex + 1, payloadIndex);
     this.payload = content.slice(payloadIndex + 1);
 
+    var position;
     // Determine packet type
     switch(this.payload.charAt(0)) {
       case '\x1c':  // Current mic-e
@@ -19,14 +20,20 @@ var Packet = function(content, options) {
       case '@': // Position, w/ timestamp, w/ messaging
         this.packetType = 'position';
         this.time = Packet.decodeTime(this.payload.slice(1,8));
+        position = Packet.decodePosition(this.payload.slice(8, 27));
         break;
       case '!': // Position, w/o timestamp, w/o messaging
       case '=': // Position, w/o timestamp, w/ messaging
         this.packetType = 'position';
         this.time = Packet.decodeTime();
+        position = Packet.decodePosition(this.payload.slice(1,20));
         break;
     }
-
+    if(position) {
+      this.latitude = position.latitude;
+      this.longitude = position.longitude;
+      this.symbol = position.symbolTable + position.symbolCode;
+    }
   } else {
     // Unpack the options
 

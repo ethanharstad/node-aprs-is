@@ -57,11 +57,18 @@ APRS.prototype.parse = function(data) {
     }
   } else {
     var packet = new Packet(data);
-    console.log('From: ', packet.sourceAddress);
-    console.log('Dest: ', packet.destinationAddress);
-    console.log('Data: ', packet.payload);
+    console.log('From:', packet.sourceAddress);
+    console.log('Dest:', packet.destinationAddress);
+    console.log('Data:', packet.payload);
     if(packet.time) {
-      console.log('Time: ', packet.time);
+      console.log('Time:', packet.time);
+    } else {
+      console.log('Time: NONE');
+    }
+    if(packet.latitude) {
+      console.log(' Pos:', packet.latitude, packet.longitude);
+    } else {
+      console.log(' Pos: NONE');
     }
   }
 };
