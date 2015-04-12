@@ -210,7 +210,7 @@ describe.only('Packet', function() {
   describe('compressed position', function() {
 
     it('compresses latitude', function() {
-      assert.equal(Packet.compressLatitude(12.12), 'HBL^');
+      assert.equal(Packet.compressLatitude(49.5), '5L!!');
     });
 
     it('compresses longitude', function() {
@@ -218,7 +218,7 @@ describe.only('Packet', function() {
     });
 
     it('decompresses latitude', function() {
-      assert.closeTo(Packet.decompressLatitude('HBL^'), 12.12, 0.00001);
+      assert.closeTo(Packet.decompressLatitude('5L!!'), 49.5, 0.00001);
     });
 
     it('decompresses longitude', function() {
